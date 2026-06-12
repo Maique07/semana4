@@ -117,7 +117,8 @@ app.MapDelete("/funcionario/{id}", (int id) =>
         return Results.NotFound(new {mensage = "funcionario não encontrado"});
 });
 
-app.MapGet("/funcionario/departamento/busca", (string departamento) =>
+
+app.MapGet("/funcionario/departamento/busca/{departamento}", (string departamento) =>
 {
     Funcionario[] funcionariosEncontrados = new Funcionario[totalFuncionarios];
 
@@ -155,7 +156,8 @@ app.MapGet("/funcionario/departamento/busca", (string departamento) =>
     });
 });
 
-app.MapGet("/funcionario/busca", (string nome) =>
+
+app.MapGet("/funcionario/busca/{nome}", (string nome) =>
 {
     Funcionario[] funcionariosEncontrados = new Funcionario[totalFuncionarios];
 
@@ -191,5 +193,6 @@ app.MapGet("/funcionario/busca", (string nome) =>
         message = "Nenhum funcionário encontrado esse nome."
     });
 });
+
 
 app.Run();

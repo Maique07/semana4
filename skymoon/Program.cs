@@ -54,14 +54,14 @@ app.MapPost("/funcionario", (JsonElement body) =>
 
 app.MapGet("/funcionario", () =>
 {
-    Funcionario[] funcionarioCadastrados = new Funcionario[totalFuncionarios];
+    Funcionario[] funcionariosCadastrados = new Funcionario[totalFuncionarios];
     
     for(int i = 0; i< totalFuncionarios; i++){
-        funcionarioCadastrados[i] = funcionarios[i];
+        funcionariosCadastrados[i] = funcionarios[i];
     }
     return Results.Ok(
         new{
-            funcionarioCadastrados
+            funcionariosCadastrados
 });
 });
 
@@ -161,7 +161,7 @@ app.MapGet("/funcionario/departamento/busca/{departamento}", (string departament
 app.MapGet("/funcionario/busca/{nome}", (string nome) =>
 {
     Funcionario[] funcionariosEncontrados = new Funcionario[totalFuncionarios];
-
+    
     int totalEncontrados = 0;
 
     for (int i = 0; i < totalFuncionarios; i++)
@@ -182,12 +182,16 @@ app.MapGet("/funcionario/busca/{nome}", (string nome) =>
             resultadoFinal[i] = funcionariosEncontrados[i];
         }        
 
+        Console.WriteLine("LOG: Busca por nome - Funcionário encontrado.");
+
         return Results.Ok(new
         {
             nome,
             funcionarios = funcionariosEncontrados
         });
     } 
+
+    Console.WriteLine("LOG: Busca por nome - Funcionário não encontrado.");
 
     return Results.NotFound(new
     {
